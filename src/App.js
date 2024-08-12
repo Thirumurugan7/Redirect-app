@@ -7,7 +7,7 @@ const App = () => {
     <div className=" items-center mx-auto bg-gradient-to-t from-customStart via-customStart to-blue-950 min-h-screen">
       <HeaderLogo />
       <div className="flex justify-center items-center pt-10">
-        <div className="bg-white rounded-xl mx-2 md:mx-0 w-[400px] md:w-[500px] space-y-12 pt-12">
+        <div className="bg-white rounded-xl mx-6 md:mx-0 w-[400px] md:w-[500px] space-y-8 md:space-y-12 pt-12">
           <div className="flex justify-center">
             <img className="h-12 w-12" src={Logo}></img>
           </div>
@@ -16,10 +16,10 @@ const App = () => {
           </p>
           <div className="flex justify-center">
             <div className=" space-y-6">
-              <button className="text-white text-xl shadow-blue-950 hover:shadow-2xl w-[320px] md:w-[455px] h-[48px] bg-customBorder border-2 border-customButtonStroke font-bold hover:bg-blue-900 rounded-[32px]">
+              <button className="text-white text-xl shadow-blue-950 hover:shadow-2xl w-[280px] md:w-[455px] h-[48px] bg-customBorder border-2 border-customButtonStroke font-bold hover:bg-blue-900 rounded-[32px]">
                 Connect Your Wallet
               </button>
-              <div className="text-black shadow-blue-950 hover:shadow-3xl w-[320px] md:w-[455px] h-fit p-1 hover:cursor-pointer hover:bg-slate-100 border-2 border-customButtonStroke rounded-[32px]">
+              <div className="text-black shadow-blue-950 hover:shadow-3xl w-[280px] md:w-[455px] h-fit p-1 hover:cursor-pointer hover:bg-slate-100 border-2 border-customButtonStroke rounded-[32px]">
                 <div className="flex justify-center font-bold items-center text-xl">
                   <img className=" h-6 w-6 mr-2" src={Logo}></img>
                   <p>Connect Your Wallet</p>
