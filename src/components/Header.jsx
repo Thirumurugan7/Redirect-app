@@ -10,7 +10,7 @@ const HeaderLogo = () => {
           <img
             src={HeadLogo}
             alt="Header Logo"
-            className=" h-[22px] w-[228px]"
+            className=" h-[36px] w-[228px]"
           />
       </div>
       {/* <div className="pt-[40px]">
