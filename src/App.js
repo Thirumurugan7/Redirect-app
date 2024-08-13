@@ -28,7 +28,7 @@ const App = () => {
 
   const check = async()=>{
     try {
-      const res = await axios.post("http://localhost:8080/coinbase/addressExists",{
+      const res = await axios.post("https://api.ultimatedigits.com/coinbase/addressExists",{
         address:account.address
       })
 
