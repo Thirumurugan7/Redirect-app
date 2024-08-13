@@ -38,6 +38,8 @@ const App = () => {
         alert("exits")
         const redirectUrl = `myapp://auth?token=12421421`;
         window.location.href = redirectUrl;
+      }else{
+        window.alert("no user found")
       }
     } catch (error) {
       console.log("error in getting the address check",error);
