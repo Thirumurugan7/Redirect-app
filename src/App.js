@@ -1,8 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeaderLogo from "./components/Header";
 import Logo from "../src/assets/logo.png";
+import { ConnectButton, getDefaultConfig } from '@rainbow-me/rainbowkit';
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+  baseSepolia
+} from 'wagmi/chains';
+import { getAccount } from '@wagmi/core'
+import { useAccount } from 'wagmi'
+import axios from "axios";
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, polygon, optimism, arbitrum, base,baseSepolia],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+});
 
 const App = () => {
+  const account = useAccount({
+    config,
+  })
+
+
+  const check = async()=>{
+    try {
+      const res = await axios.post("http://localhost:8080/coinbase/addressExists",{
+        address:account.address
+      })
+
+      console.log("res",res.data);
+
+      if(res.data.exists){
+        alert("exits")
+        const redirectUrl = `myapp://auth?token=12421421`;
+        window.location.href = redirectUrl;
+      }
+    } catch (error) {
+      console.log("error in getting the address check",error);
+    }
+  }
+  useEffect(()=>{
+if(account){
+  console.log("account",account);
+
+  if(account.address !== undefined || account.address !== null){
+    check()
+  }
+}
+  },[account])
   return (
     <div className=" items-center mx-auto bg-gradient-to-t from-customStart via-customStart to-blue-950 min-h-screen">
       <HeaderLogo />
@@ -16,9 +65,10 @@ const App = () => {
           </p>
           <div className="flex justify-center">
             <div className=" space-y-6">
-              <button className="text-white text-xl shadow-blue-950 hover:shadow-2xl w-[280px] md:w-[455px] h-[48px] bg-customBorder border-2 border-customButtonStroke font-bold hover:bg-blue-900 rounded-[32px]">
-                Connect Your Wallet
+              <button className="text-white text-xl flex justify-center items-center shadow-blue-950 hover:shadow-2xl w-[280px] md:w-[455px] h-[48px] bg-customBorder border-2 border-customButtonStroke font-bold hover:bg-blue-900 rounded-[32px]">
+                 <ConnectButton />
               </button>
+           
               <div className="text-black shadow-blue-950 hover:shadow-3xl w-[280px] md:w-[455px] h-fit p-1 hover:cursor-pointer hover:bg-slate-100 border-2 border-customButtonStroke rounded-[32px]">
                 <div className="flex justify-center font-bold items-center text-xl">
                   <img className=" h-6 w-6 mr-2" src={Logo}></img>
