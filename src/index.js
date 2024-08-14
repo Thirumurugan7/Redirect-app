@@ -21,6 +21,10 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
+import { WalletProvider, useWalletContext } from "@coinbase/waas-sdk-web-react";
+
+import { ProtocolFamily } from "@coinbase/waas-sdk-web";
+
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
@@ -32,7 +36,14 @@ const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+
+    <WalletProvider
+      verbose
+      enableHostedBackups={true}
+      collectAndReportMetrics
+      prod={false}
+      projectId={"0f9bcc25-9ab2-42b5-90d2-122588e83383"}
+    >
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
@@ -40,6 +51,6 @@ root.render(
     </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
-  </React.StrictMode>
+</WalletProvider>
 );
 

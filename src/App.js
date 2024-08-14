@@ -7,16 +7,19 @@ import {
   polygon,
   optimism,
   arbitrum,
-  base,
-  baseSepolia
+  base
 } from 'wagmi/chains';
 import { getAccount } from '@wagmi/core'
 import { useAccount } from 'wagmi'
 import axios from "axios";
+
+import { WalletProvider, useWalletContext } from "@coinbase/waas-sdk-web-react";
+
+import { ProtocolFamily } from "@coinbase/waas-sdk-web";
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
-  chains: [mainnet, polygon, optimism, arbitrum, base,baseSepolia],
+  chains: [mainnet, polygon, optimism, arbitrum, base],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 
@@ -25,8 +28,10 @@ const App = () => {
     config,
   })
 
-
+  const { waas, user, isCreatingWallet, wallet, isLoggingIn, error } =
+    useWalletContext();
   const check = async()=>{
+    if(account.address )
     try {
       const res = await axios.post("https://api.ultimatedigits.com/coinbase/addressExists",{
         address:account.address
@@ -50,10 +55,27 @@ if(account){
   console.log("account",account);
 
   if(account.address !== undefined || account.address !== null){
+    console.log("acccount add", account.address);
     check()
   }
 }
   },[account])
+
+
+  const handleUltimate = async()=>{
+    try {
+      console.log("user", user);
+      console.log("Waas", waas);
+
+      const res = await waas.login();
+      console.log(res);
+      console.log("wallet", wallet);
+      console.log("user", user);
+      console.log("isCreatingWallet", isCreatingWallet);
+    } catch (error) {
+      console.log("waas eeror",error);
+    }
+  }
   return (
     <div className=" items-center mx-auto bg-gradient-to-t from-customStart via-customStart to-blue-950 min-h-screen">
       <HeaderLogo />
@@ -71,10 +93,10 @@ if(account){
                  <ConnectButton />
               </button>
            
-              <div className="text-black shadow-blue-950 hover:shadow-3xl w-[280px] md:w-[455px] h-fit p-1 hover:cursor-pointer hover:bg-slate-100 border-2 border-customButtonStroke rounded-[32px]">
-                <div className="flex justify-center font-bold items-center text-xl">
+              <div  className="text-black shadow-blue-950 hover:shadow-3xl w-[280px] md:w-[455px] h-fit p-1 hover:cursor-pointer hover:bg-slate-100 border-2 border-customButtonStroke rounded-[32px]">
+                <div onClick={handleUltimate} className="flex justify-center font-bold items-center text-xl">
                   <img className=" h-6 w-6 mr-2" src={Logo}></img>
-                  <p>Connect Your Wallet</p>
+                  <p>Connect Your Ultimate Wallet</p>
                 </div>
                 <div className=" flex justify-center items-center  text-slate-400">
                   <svg
