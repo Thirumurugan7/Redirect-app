@@ -33,9 +33,9 @@ const App = () => {
       })
 
       console.log("res",res.data);
-
+window.alert("user checking" , account.address)
       if(res.data.exists){
-        alert("exits")
+        window.alert("exits")
         const redirectUrl = `myapp://auth?token=12421421`;
         window.location.href = redirectUrl;
       }else{
