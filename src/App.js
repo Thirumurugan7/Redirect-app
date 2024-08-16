@@ -30,15 +30,15 @@ const App = () => {
 
   const { waas, user, isCreatingWallet, wallet, isLoggingIn, error } =
     useWalletContext();
-  const check = async()=>{
-    if(account.address )
+  const check = async(address)=>{
+    if(address )
     try {
       const res = await axios.post("https://api.ultimatedigits.com/coinbase/addressExists",{
         address:account.address
       })
 
       console.log("res",res.data);
-window.alert("user checking" , account.address)
+window.alert("user checking" , address)
       if(res.data.exists){
         window.alert("exits")
         const redirectUrl = `myapp://auth?token=12421421`;
@@ -56,7 +56,7 @@ if(account){
 
   if(account.address !== undefined || account.address !== null){
     console.log("acccount add", account.address);
-    check()
+    check(account.address)
   }
 }
   },[account])
@@ -66,12 +66,34 @@ if(account){
     try {
       console.log("user", user);
       console.log("Waas", waas);
+if(user){
+  console.log("need to logout");
+  const res1 = await waas.logout();
 
+}
       const res = await waas.login();
       console.log(res);
       console.log("wallet", wallet);
       console.log("user", user);
       console.log("isCreatingWallet", isCreatingWallet);
+
+      if(res.hasWallet === false){
+alert("wallet illa da")
+      }
+else if(res.hasWallet === true){
+
+  const res2 = await res.restoreFromHostedBackup();
+  console.log(res2);
+
+  const address = await res2.addresses.for(ProtocolFamily.EVM);
+  const priv = await res.backup;
+  console.log("private keys", priv);
+  console.log("address", address);
+
+  console.log(`Got address: ${address.address}`);
+
+check(address.address)
+}
     } catch (error) {
       console.log("waas eeror",error);
     }
