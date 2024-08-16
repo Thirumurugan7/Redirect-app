@@ -31,6 +31,7 @@ const App = () => {
   const { waas, user, isCreatingWallet, wallet, isLoggingIn, error } =
     useWalletContext();
   const check = async(address)=>{
+    window.alert(address)
     if(address )
     try {
       const res = await axios.post("https://api.ultimatedigits.com/coinbase/addressExists",{
