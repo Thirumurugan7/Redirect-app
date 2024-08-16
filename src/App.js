@@ -143,8 +143,13 @@ check(address.address)
                     <span className=" text-blue-500 font-bold">coinbase</span>{" "}
                   </p>
                 </div>
+
               </div>
             </div>
+          </div>
+          <div>
+          <a href="instagram://user?username=thiru_levi">Click here if you’re not redirected</a>
+
           </div>
           <div className="text-center pb-10 text-black">
             &copy; 2024 Ultimate Digits. All rights reserved.
