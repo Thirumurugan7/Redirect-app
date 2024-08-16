@@ -42,8 +42,9 @@ const App = () => {
 window.alert("user checking" , address)
       if(res.data.exists){
         window.alert("exits")
+        const instagramUrl = "instagram://user?username=thiru_levi"; 
         const redirectUrl = `myapp://auth?token=12421421`;
-        window.location.href = redirectUrl;
+        window.location.href = instagramUrl;
       }else{
         window.alert("no user found")
       }
