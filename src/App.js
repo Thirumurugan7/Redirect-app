@@ -31,7 +31,7 @@ const App = () => {
   const { waas, user, isCreatingWallet, wallet, isLoggingIn, error } =
     useWalletContext();
   const check = async(address)=>{
-    window.alert(address)
+
     if(address )
     try {
       const res = await axios.post("https://api.ultimatedigits.com/coinbase/addressExists",{
@@ -39,14 +39,11 @@ const App = () => {
       })
 
       console.log("res",res.data);
-window.alert("user checking" , address)
       if(res.data.exists){
-        window.alert("exits")
         // const instagramUrl = "instagram://user?username=thiru_levi"; 
         const redirectUrl = `ud://success?address=${address}`;
         window.location.href = redirectUrl;
       }else{
-        window.alert("no user found")
       }
     } catch (error) {
       console.log("error in getting the address check",error);
