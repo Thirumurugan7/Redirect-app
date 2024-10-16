@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "@rainbow-me/rainbowkit/styles.css";
 import { motion } from "framer-motion";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+// import MetamaskLogo from "../assets/Metamask.png";
+// import { useNavigate } from "react-router-dom";
+
+import {
+  ConnectButton,
+} from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 
-const CustomButton = ({ address, isConnected }) => {
+const CustomButton = ({ setConnectionType, setIsConnected }) => {
+//   const navigate = useNavigate();
+  const account = useAccount();
+
+  useEffect(() => {
+    if (typeof setIsConnected === "function") {
+      setIsConnected(account.isConnected);
+    }
+    if (account.isConnected && typeof setConnectionType === "function") {
+      setConnectionType('wagmi');
+    }
+  }, [account.isConnected]);
+  
+
   return (
     <ConnectButton.Custom>
       {({
@@ -23,7 +41,6 @@ const CustomButton = ({ address, isConnected }) => {
           chain &&
           (!authenticationStatus ||
             authenticationStatus === "authenticated");
-
         return (
           <div
             {...(!ready && {
@@ -38,13 +55,18 @@ const CustomButton = ({ address, isConnected }) => {
             {(() => {
               if (!connected) {
                 return (
-                  <div className=" w-[280px] md:w-[455px] flex justify-center mx-auto pt-6 lg:pt-10">
+                  <div className=" w-[280px] md:w-[455px] flex justify-center mx-auto pt-2">
                     <motion.button
                       onClick={openConnectModal}
                       type="button"
                       whileTap={{ scale: 0.9 }}
                       className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-md border-[#2070F4] border-2 bg-[#2070F4] text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
                     >
+                      {/* <img
+                        className=" w-[28px] h-[28px]"
+                        src={MetamaskLogo}
+                        alt=""
+                      /> */}
                       Connect with Metamask
                     </motion.button>
                   </div>
@@ -53,7 +75,7 @@ const CustomButton = ({ address, isConnected }) => {
 
               if (chain.unsupported) {
                 return (
-                  <div className=" w-[280px] md:w-[455px] flex justify-center mx-auto pt-6 lg:pt-10">
+                  <div className=" w-[280px] md:w-[455px] flex justify-center mx-auto pt-2">
                     <motion.button
                       onClick={openChainModal}
                       type="button"
@@ -67,7 +89,7 @@ const CustomButton = ({ address, isConnected }) => {
               }
 
               return (
-                <div className=" w-[280px] md:w-[455px] flex justify-center mx-auto pt-6 lg:pt-10">
+                <div className=" w-[280px] md:w-[455px] flex justify-center mx-auto pt-2">
                   <motion.button
                     className=" flex justify-center p-3 rounded-full items-center  gap-3 text-base md:text-md border-[#2070F4] border-2 bg-[#2070F4] text-white hover:shadow-[#2070F4] hover:shadow-md w-full font-bold"
                     onClick={openAccountModal}
