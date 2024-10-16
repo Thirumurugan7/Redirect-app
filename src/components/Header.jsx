@@ -6,7 +6,7 @@ const HeaderLogo = () => {
 
   return (
     <div>
-      <div className="pt-10 mx-auto flex justify-center">
+      <div className=" mx-auto flex justify-center">
           <img
             src={HeadLogo}
             alt="Header Logo"
