@@ -17,22 +17,27 @@ const App = () => {
   const { waas, user, isCreatingWallet, wallet, isLoggingIn, error } =
     useWalletContext();
 
-  const check = async (address) => {
-    if (address) {
-      try {
-        const res = await axios.post(
-          "https://api.ultimatedigits.com/coinbase/addressExists",
-          { address }
-        );
-        if (res.data.exists) {
-          const redirectUrl = `ud://success?address=${address}`;
-          window.location.href = redirectUrl;
+    const check = async (address) => {
+      if (address) {
+        try {
+          const res = await axios.post(
+            "https://api.ultimatedigits.com/coinbase/addressExists",
+            { address }
+          );
+    
+          if (res.data.exists) {
+            const redirectUrl = `ud://success?address=${address}`;
+            window.location.href = redirectUrl;
+          } else {
+            // Redirect to the specified URL if the address does not exist
+            window.location.href = "https://www.ultimatedigits.com/";
+          }
+        } catch (error) {
+          console.error("Error checking address:", error);
         }
-      } catch (error) {
-        console.error("Error checking address:", error);
       }
-    }
-  };
+    };
+    
 
   useEffect(() => {
     if (isConnected && address) {
