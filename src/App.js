@@ -65,7 +65,7 @@ const App = () => {
   };
 
   return (
-    <div className="items-center mx-auto bg-gradient-to-t from-customStart via-customStart to-blue-950 flex justify-center min-h-screen inter-font">
+    <div className="items-center mx-auto bg-gradient-to-t from-customStart via-customStart to-blue-950 flex justify-center h-screen lg:min-h-screen inter-font">
       <div>
         <HeaderLogo />
         <div className="flex justify-center items-center pt-10">
