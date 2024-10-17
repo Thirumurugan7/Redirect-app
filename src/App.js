@@ -86,11 +86,11 @@ const App = () => {
                 />
               </div>
             </div>
-            <div className="text-center">
+            {/* <div className="text-center">
               <a href="https://www.ultimatedigits.com/" className="underline">
                 Click here if you’re not redirected
               </a>
-            </div>
+            </div> */}
             <div className="text-center text-black">
               &copy; 2024 Ultimate Digits. All rights reserved.
             </div>
